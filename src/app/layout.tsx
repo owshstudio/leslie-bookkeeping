@@ -1,10 +1,48 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
+import { Inter } from "next/font/google";
 import "./globals.css";
 
+const inter = Inter({
+  subsets: ["latin"],
+  variable: "--font-sans",
+});
+
 export const metadata: Metadata = {
-  title: "Leslie Bookkeeping | Professional Bookkeeping Services",
+  title: "Leslie Bookkeeping | Professional Bookkeeping Services for Small Businesses",
   description:
-    "Experience the ease and confidence of having your finances expertly managed so you can concentrate on what you do best.",
+    "Leslie Bookkeeping offers professional bookkeeping, cleanup, and administrative services for small businesses and farms. QuickBooks and Ambrook certified. Get organized and confident with your finances.",
+  metadataBase: new URL("https://lesliebookkeeping.com"),
+  alternates: {
+    canonical: "https://lesliebookkeeping.com",
+  },
+  openGraph: {
+    title: "Leslie Bookkeeping | Professional Bookkeeping Services for Small Businesses",
+    description:
+      "Expert bookkeeping, cleanup, and administrative services for small businesses and farms. QuickBooks and Ambrook certified.",
+    type: "website",
+    url: "https://lesliebookkeeping.com",
+    siteName: "Leslie Bookkeeping",
+    images: [
+      {
+        url: "/images/logo.png",
+        width: 512,
+        height: 512,
+        alt: "Leslie Bookkeeping logo",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary",
+    title: "Leslie Bookkeeping | Professional Bookkeeping Services",
+    description:
+      "Expert bookkeeping, cleanup, and administrative services for small businesses and farms. QuickBooks and Ambrook certified.",
+    images: ["/images/logo.png"],
+  },
+};
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
 };
 
 export default function RootLayout({
@@ -13,11 +51,33 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" className={inter.variable}>
       <head>
-        <link
-          href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@400;500;600;700&display=swap"
-          rel="stylesheet"
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "LocalBusiness",
+              name: "Leslie Bookkeeping",
+              description:
+                "Professional bookkeeping, cleanup, and administrative services for small businesses and farms.",
+              url: "https://lesliebookkeeping.com",
+              logo: "https://lesliebookkeeping.com/images/logo.png",
+              image: "https://lesliebookkeeping.com/images/logo.png",
+              email: "lesliebookkeepingllc@gmail.com",
+              sameAs: [
+                "https://www.facebook.com/profile.php?id=100088005292186",
+              ],
+              priceRange: "$$",
+              serviceType: [
+                "Bookkeeping",
+                "Cleanup Bookkeeping",
+                "Administrative Work",
+                "Small Projects",
+              ],
+            }),
+          }}
         />
       </head>
       <body className="antialiased">{children}</body>
