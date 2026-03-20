@@ -98,7 +98,13 @@ body {
   pointer-events: none;
 }
 
-/* Arc stays identical at all screen sizes — overflow:hidden + wrapper mask handle the rest */
+/* On mobile, ensure bottom fade fully covers any arc clipping artifacts */
+@media (max-width: 640px) {
+  .hero-bottom-fade {
+    height: 250px;
+    z-index: 5;
+  }
+}
 
 /* 4) Animated colored glow — cyan-to-pink with slow drift */
 .hero-color-glow {
@@ -236,6 +242,20 @@ body {
 
 .card-dark:hover {
   border-color: rgba(255, 255, 255, 0.12);
+}
+
+/* ===== DARK GLASS CARD (How I Do It section) ===== */
+.card-dark-glass {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+  backdrop-filter: blur(10px);
+  transition: border-color 0.3s, background 0.3s;
+}
+
+.card-dark-glass:hover {
+  background: rgba(255, 255, 255, 0.06);
+  border-color: rgba(255, 255, 255, 0.14);
 }
 
 /* ===== LIGHT CARD ===== */

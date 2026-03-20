@@ -41,8 +41,9 @@ const viewportOpts = { once: true, amount: 0.01 as const };
 const services = [
   {
     title: "Monthly Bookkeeping",
+    subtitle: "Stay ahead of the game.",
     description:
-      "Stay ahead of the game with monthly bookkeeping. This is ideal for those who are up-to-date and seeking ongoing support. I'll ensure your books are always accurate and ready for whatever comes next.",
+      "Monthly bookkeeping is ideal for those who are up-to-date and seeking ongoing support. I'll ensure your books are always accurate and ready for whatever comes next.",
     image: "/images/service-monthly-2.png",
     imageAlt: "Monthly bookkeeping service illustration showing organized financial records",
     imageRight: true,
@@ -129,13 +130,23 @@ export default function Home() {
     message: "",
   });
 
-  function handleSubmit(e: FormEvent) {
+  async function handleSubmit(e: FormEvent) {
     e.preventDefault();
-    const subject = encodeURIComponent("Bookkeeping Inquiry");
-    const body = encodeURIComponent(
-      `Name: ${formData.name}\nEmail: ${formData.email}\nPhone: ${formData.phone}\nService: ${formData.service}\n\n${formData.message}`
-    );
-    window.location.href = `mailto:lesliebookkeepingllc@gmail.com?subject=${subject}&body=${body}`;
+    const res = await fetch("https://formspree.io/f/xreydjqq", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        name: formData.name,
+        email: formData.email,
+        phone: formData.phone,
+        service: formData.service,
+        message: formData.message,
+      }),
+    });
+    if (res.ok) {
+      setFormData({ name: "", email: "", phone: "", service: "", message: "" });
+      alert("Thank you! Your message has been sent.");
+    }
   }
 
   return (
@@ -151,8 +162,8 @@ export default function Home() {
       <nav className="fixed top-0 z-50 w-full bg-dark/70 backdrop-blur-xl border-b border-white/5" aria-label="Main navigation">
         <div className="mx-auto flex max-w-[1200px] items-center justify-between px-4 sm:px-6 md:px-10 h-[60px] sm:h-[75px]">
           <a href="#" className="flex items-center gap-2 sm:gap-3" aria-label="Leslie Bookkeeping - Home">
-            <div className="relative h-8 w-8 sm:h-9 sm:w-9 overflow-hidden rounded-full">
-              <Image src="/images/logo.png" alt="Leslie Bookkeeping logo" fill sizes="36px" className="object-cover" />
+            <div className="relative h-10 w-10 sm:h-11 sm:w-11 overflow-hidden rounded-full">
+              <Image src="/images/logo.png" alt="Leslie Bookkeeping logo" fill sizes="44px" className="object-cover" />
             </div>
             <span className="text-white font-semibold text-[14px] sm:text-[15px]">
               Leslie Bookkeeping
@@ -197,7 +208,7 @@ export default function Home() {
 
       <main>
         {/* Hero */}
-        <section className="hero-bg pt-[110px] sm:pt-[150px] pb-[240px] sm:pb-[200px]" aria-label="Hero">
+        <section className="hero-bg pt-[120px] sm:pt-[160px] pb-[220px]" aria-label="Hero">
           {/* Layered sphere effect */}
           <div className="hero-color-glow" />
           <div className="hero-color-glow-2" />
@@ -214,7 +225,7 @@ export default function Home() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.65, ease: "easeOut" }}
               className="mx-auto max-w-3xl font-bold leading-[1.15] text-white"
-            style={{ fontSize: "clamp(32px, 5vw, 50px)" }}
+              style={{ fontSize: "clamp(32px, 5vw, 50px)" }}
             >
               You Run Your Business,
               <br />
@@ -276,7 +287,7 @@ export default function Home() {
         </section>
 
         {/* Services */}
-        <section id="services" className="relative z-10 pt-0 pb-20 md:-mt-10 md:pt-0 md:pb-[100px] bg-dark" aria-label="Services">
+        <section id="services" className="relative z-10 pt-0 pb-20 md:-mt-10 md:pb-[100px] bg-dark" aria-label="Services">
           <div className="mx-auto max-w-[1200px] px-6 md:px-10">
             <motion.div
               initial="hidden"
@@ -286,8 +297,8 @@ export default function Home() {
               variants={fadeUp}
               className="text-center mb-14"
             >
-              <h2 className="text-[26px] sm:text-[34px] font-bold text-white">
-                Bookkeeping for Every Business Need
+              <h2 className="font-bold text-white text-balance" style={{ fontSize: "clamp(24px, 4vw, 34px)" }}>
+                Bookkeeping for <em className="not-italic text-violet-light">Every</em> Business Need
               </h2>
             </motion.div>
 
@@ -352,7 +363,7 @@ export default function Home() {
               variants={fadeUp}
               className="text-center mb-14"
             >
-              <h2 className="text-[26px] sm:text-[34px] font-bold text-white">How I Do It</h2>
+              <h2 className="font-bold text-white text-balance" style={{ fontSize: "clamp(24px, 4vw, 34px)" }}>How I Do It</h2>
             </motion.div>
 
             <div className="grid grid-cols-2 gap-4 sm:gap-5 lg:grid-cols-4">
@@ -364,17 +375,17 @@ export default function Home() {
                   viewport={viewportOpts}
                   custom={i + 1}
                   variants={fadeUp}
-                  className="card-light p-6 text-center"
+                  className="card-dark-glass p-5 sm:p-6 text-center"
                 >
                   <div
                     className="mx-auto flex h-11 w-11 items-center justify-center rounded-lg"
-                    style={{ backgroundColor: `${item.color}18` }}
+                    style={{ backgroundColor: `${item.color}15` }}
                     aria-hidden="true"
                   >
                     <item.icon className="h-5 w-5" style={{ color: item.color }} />
                   </div>
-                  <h3 className="mt-4 text-[14px] font-semibold text-[#0a0a0a]">{item.title}</h3>
-                  <p className="mt-2 text-[12px] leading-relaxed text-[#666]">{item.description}</p>
+                  <h3 className="mt-4 text-[13px] sm:text-[14px] font-semibold text-white">{item.title}</h3>
+                  <p className="mt-2 text-[11px] sm:text-[12px] leading-relaxed text-[#888]">{item.description}</p>
                 </motion.div>
               ))}
             </div>
@@ -417,7 +428,7 @@ export default function Home() {
               </div>
 
               <div>
-                <h2 className="text-[26px] sm:text-[34px] font-bold text-white">About Me</h2>
+                <h2 className="font-bold text-white text-balance" style={{ fontSize: "clamp(24px, 4vw, 34px)" }}>About Me</h2>
                 <p className="mt-4 text-[15px] leading-relaxed text-[#999]">
                   Hi, I&apos;m Heather, a professional bookkeeper, business owner,
                   and mom of two. I help business owners stay organized, confident,
@@ -459,7 +470,7 @@ export default function Home() {
               variants={fadeUp}
               className="text-center mb-12"
             >
-              <h2 className="text-[26px] sm:text-[34px] font-bold text-white">Contact</h2>
+              <h2 className="font-bold text-white text-balance" style={{ fontSize: "clamp(24px, 4vw, 34px)" }}>Contact</h2>
               <p className="mt-3 text-[15px] text-[#888]">
                 Ready to take control of your finances? Let&apos;s talk.
               </p>
@@ -569,12 +580,12 @@ export default function Home() {
                 <FacebookIcon className="h-8 w-8" /> Follow
               </a>
             </div>
-            <div className="relative h-8 w-8 overflow-hidden rounded-full">
-              <Image src="/images/logo.png" alt="Leslie Bookkeeping logo" fill sizes="32px" className="object-cover" />
+            <div className="relative h-10 w-10 overflow-hidden rounded-full">
+              <Image src="/images/logo.png" alt="Leslie Bookkeeping logo" fill sizes="40px" className="object-cover" />
             </div>
             <p className="text-xs text-[#555]">
               Website by{" "}
-              <a href="https://owshsystems.com" target="_blank" rel="noopener noreferrer" className="transition hover:text-white">
+              <a href="https://owshstudio.com" target="_blank" rel="noopener noreferrer" className="transition hover:text-white">
                 OWSH Studio
               </a>
             </p>
