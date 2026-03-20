@@ -1,0 +1,100 @@
+@import "tailwindcss";
+
+@theme {
+  --color-cosmic-900: #0a0a1a;
+  --color-cosmic-800: #111122;
+  --color-cosmic-700: #151525;
+  --color-cosmic-600: #1a1a2e;
+  --color-cosmic-500: #252540;
+
+  --color-violet: #8b5cf6;
+  --color-violet-light: #a78bfa;
+  --color-violet-dark: #7c3aed;
+  --color-magenta: #d946ef;
+  --color-cyan-accent: #06b6d4;
+  --color-coral: #f97066;
+
+  --font-sans: "Inter", "DM Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-serif: "Playfair Display", ui-serif, Georgia, serif;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-sans);
+  color: #e5e7eb;
+  background-color: #0a0a1a;
+}
+
+/* Purple gradient divider */
+.section-divider {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(139, 92, 246, 0.4), rgba(217, 70, 239, 0.2), transparent);
+}
+
+/* Aurora/nebula background effect */
+.aurora-bg {
+  position: relative;
+  overflow: hidden;
+}
+
+.aurora-bg::before {
+  content: "";
+  position: absolute;
+  top: -40%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 120%;
+  height: 100%;
+  background:
+    radial-gradient(ellipse 600px 400px at 40% 20%, rgba(139, 92, 246, 0.25), transparent),
+    radial-gradient(ellipse 500px 350px at 60% 30%, rgba(217, 70, 239, 0.18), transparent),
+    radial-gradient(ellipse 400px 300px at 50% 10%, rgba(59, 130, 246, 0.15), transparent);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Glow card styling */
+.glow-card {
+  background: #1a1a2e;
+  border: 1px solid rgba(139, 92, 246, 0.2);
+  box-shadow: 0 0 20px rgba(139, 92, 246, 0.05), 0 4px 20px rgba(0, 0, 0, 0.3);
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.glow-card:hover {
+  border-color: rgba(139, 92, 246, 0.4);
+  box-shadow: 0 0 30px rgba(139, 92, 246, 0.1), 0 8px 30px rgba(0, 0, 0, 0.4);
+}
+
+/* Purple glow button */
+.btn-glow {
+  border: 1px solid rgba(139, 92, 246, 0.5);
+  box-shadow: 0 0 15px rgba(139, 92, 246, 0.15);
+  transition: all 0.3s;
+}
+
+.btn-glow:hover {
+  border-color: rgba(139, 92, 246, 0.8);
+  box-shadow: 0 0 25px rgba(139, 92, 246, 0.3);
+}
+
+/* Input styling */
+.cosmic-input {
+  background: #1a1a2e;
+  border: 1px solid rgba(139, 92, 246, 0.2);
+  color: #e5e7eb;
+  transition: border-color 0.3s;
+}
+
+.cosmic-input:focus {
+  outline: none;
+  border-color: rgba(139, 92, 246, 0.6);
+  box-shadow: 0 0 10px rgba(139, 92, 246, 0.15);
+}
+
+.cosmic-input::placeholder {
+  color: #6b7280;
+}
