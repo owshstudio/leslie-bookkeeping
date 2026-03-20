@@ -244,12 +244,12 @@ export default function Home() {
                     Learn More
                   </a>
                 </div>
-                <div className="relative h-44 w-44 shrink-0 rounded-2xl overflow-hidden">
+                <div className="relative h-56 w-56 shrink-0 rounded-2xl overflow-hidden">
                   <Image
                     src={service.image}
                     alt={service.title}
                     fill
-                    sizes="176px"
+                    sizes="224px"
                     className="object-contain"
                   />
                 </div>

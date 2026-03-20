@@ -34,24 +34,55 @@ body {
   background: linear-gradient(90deg, transparent, rgba(139, 92, 246, 0.4), rgba(217, 70, 239, 0.2), transparent);
 }
 
-/* Aurora/nebula background effect */
+/* Cosmic sphere hero background */
 .aurora-bg {
   position: relative;
   overflow: hidden;
 }
 
+/* The glowing sphere */
 .aurora-bg::before {
   content: "";
   position: absolute;
-  top: -40%;
+  bottom: -30%;
   left: 50%;
   transform: translateX(-50%);
-  width: 120%;
-  height: 100%;
-  background:
-    radial-gradient(ellipse 600px 400px at 40% 20%, rgba(139, 92, 246, 0.25), transparent),
-    radial-gradient(ellipse 500px 350px at 60% 30%, rgba(217, 70, 239, 0.18), transparent),
-    radial-gradient(ellipse 400px 300px at 50% 10%, rgba(59, 130, 246, 0.15), transparent);
+  width: 900px;
+  height: 900px;
+  border-radius: 50%;
+  background: radial-gradient(
+    ellipse at 40% 35%,
+    rgba(180, 100, 255, 0.55) 0%,
+    rgba(139, 92, 246, 0.45) 20%,
+    rgba(100, 60, 200, 0.3) 40%,
+    rgba(60, 30, 120, 0.2) 60%,
+    transparent 80%
+  );
+  box-shadow:
+    0 0 120px 60px rgba(139, 92, 246, 0.2),
+    0 0 240px 120px rgba(100, 50, 200, 0.1);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Horizon glow arc */
+.aurora-bg::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 140%;
+  height: 2px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(139, 92, 246, 0.6) 20%,
+    rgba(217, 70, 239, 0.8) 50%,
+    rgba(139, 92, 246, 0.6) 80%,
+    transparent 100%
+  );
+  filter: blur(3px);
   pointer-events: none;
   z-index: 0;
 }
